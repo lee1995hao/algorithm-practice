@@ -19,4 +19,22 @@ solution.countOfAirplanes <- function(airplanes) {
 }
 
 
-###2
+###light question 
+light_R_P <- matrix(c(-3,2,1,2,3,2), ncol = 2 , byrow = T)
+range_l <- NULL
+for (i in 1:nrow(light_R_P)) {
+  range_l <- rbind(range_l, c(light_R_P[i,1] - light_R_P[i,2],  light_R_P[i,1] + light_R_P[i,2]))
+}
+max_l <- max(range_l)
+min_l <- min(range_l)
+point_l <- rep(0,11)
+range_ll <- c(min_l:max_l)
+for(j in 1:nrow(range_l)){
+  t_l  <- c(range_l[j,1]:range_l[j,2])
+  for (i in 1:length(c(min_l:max_l))) {
+    if(range_ll[i] %in% t_l){ point_l[i] <- point_l[i] + 1}
+  }
+  
+}
+min(range_ll[which(point_l >= 2)])
+
