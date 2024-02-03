@@ -17,3 +17,6 @@ solution.countOfAirplanes <- function(airplanes) {
   return(still = air- drop) 
   
 }
+
+
+###2
