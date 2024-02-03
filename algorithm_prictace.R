@@ -27,8 +27,9 @@ for (i in 1:nrow(light_R_P)) {
 }
 max_l <- max(range_l)
 min_l <- min(range_l)
-point_l <- rep(0,11)
 range_ll <- c(min_l:max_l)
+point_l <- rep(0, length(range_ll))
+
 for(j in 1:nrow(range_l)){
   t_l  <- c(range_l[j,1]:range_l[j,2])
   for (i in 1:length(c(min_l:max_l))) {
