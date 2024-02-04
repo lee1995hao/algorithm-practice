@@ -39,3 +39,27 @@ for(j in 1:nrow(range_l)){
 }
 min(range_ll[which(point_l >= 2)])
 
+
+
+#Calculate the number of subarrays with more 1's than 0's.
+v <- c(1, 0, 1, 0, 1)
+all_combinations <- list()
+for (i in 1:length(v)) {
+  all_combinations[[i]] <- combn(v, i)
+}
+
+
+result_1 <- 0
+for(i in 1:length(all_combinations)){
+  for(j in 1:ncol(all_combinations[[i]])){
+    count_1 <- sum(which(all_combinations[[i]][,j] == 1))
+    count_0 <- sum(which(all_combinations[[i]][,j] == 0))
+    if(count_1 - count_0 > 0){result_1 <- result_1 + 1}
+  }
+  
+}
+
+
+
+
+
