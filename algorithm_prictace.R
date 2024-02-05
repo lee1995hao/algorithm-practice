@@ -61,5 +61,72 @@ for(i in 1:length(all_combinations)){
 
 
 
+#Dijkstra
+
+minCost <- function(n, roads, discounts) {
+  
+
+  graph <- vector("list", n) 
+  for (road in roads) {
+    u = road[1] + 1
+    v = road[2] + 1
+    cost = road[3]
+    graph[[u]] <- c(graph[[u]], list(c(v, cost))) 
+    graph[[v]] <- c(graph[[v]], list(c(u, cost)))
+  }
+  
+
+  dist <- rep(Inf, n)
+  discounts <- matrix(0, n, discounts+1)  
+  dist[1] <- 0
+  discounts[1,] <- discounts
+  
+  q <- c(1)
+  while(length(q) > 0){
+    
+
+    u <- q[which.min(dist[q])]  
+    q <- q[q != u]
+    
+    for (edge in graph[[u]]) {
+      v <- edge[[1]]
+      length <- edge[[2]]
+      
+
+      alt = dist[u] + length
+      if (alt < dist[v]) {
+        dist[v] <- alt
+        q <- c(q, v) 
+      }
+      
+
+      if (discounts[u,1] > 0 && 
+          alt - length/2 < dist[v, discounts[u,1]-1]) {
+        
+        dist[v, discounts[u,1]-1] <- alt - length/2
+        discounts[v, discounts[u,1]-1] <- discounts[u,1] - 1
+        q <- c(q, v)
+      }
+    }
+  }
+  
+  if(is.infinite(dist[n])){
+    return(-1)
+  } else {
+    return(dist[n]) 
+  }
+}
+
+
+
+n <- 4
+roads <- matrix(c(0, 1, 100, 
+                  0, 2, 300, 
+                  1, 3, 600, 
+                  2, 3, 200), byrow = TRUE, ncol = 3)
+discounts <- 1
+
+result <- minCost(n, roads, discounts)
+print(result)
 
 
