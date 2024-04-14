@@ -61,8 +61,9 @@ for(i in 1:length(all_combinations)){
 
 
 
-#Dijkstra
 
+
+#Dijkstra
 minCost <- function(n, roads, discounts) {
   
 
